@@ -22,96 +22,30 @@ Person person = new PersonBuilder()
 
 Продемонстрируйте работу ваших классов в классе `Main` (необязательно реализовывать ввод данных от пользователя).
 
-## Реализация
-1. Создайте класс `Person` с полями, необходимыми для хранения данных, указанных в условии.
-```java
-public class Person {
-  protected final String name;
-  protected final String surname;
-  //...
+## Отчет о запуске программы
 
-  public Person(String name, String surname) {
-    //...
-  }
-
-  public Person(String name, String surname, int age) {
-    //...
-  }
-}
-```
-2. Наполните класс `Person` методами, нужными для реализации поведения объектов этого класса как описано выше в условии.
-```java
-public class Person {
-  //...
-
-  public boolean hasAge() { /*...*/ }
-  public boolean hasAddress() { /*...*/ }
-
-  public String getName() { /*...*/ }
-  public String getSurname() { /*...*/ }
-  public int getAge() { /*...*/ }
-  public String getAddress() { /*...*/ }
-
-  public String setAddress(String address) { /*...*/ }
-  public void happyBirthday() { /*...*/ }
-
-  @Override
-  public String toString() { /*...*/ }
-
-  @Override
-  public int hashCode() { /*...*/ }
-}
-```
-3. Создайте класс `PersonBuilder`, наполните его полями для данных будущего объекта класса `Person` и методами их наполняющими (не забудьте про `IllegalArgumentException` в случае ввода недопустимых данных)
-```java
-public class PersonBuilder {
-  //...
-
-  public PersonBuilder setName(String name) { /*...*/ }
-  public PersonBuilder setSurname(String surname) { /*...*/ }
-  public PersonBuilder setAge(int age) { /*...*/ }
-  public PersonBuilder setAddress(String address) { /*...*/ }
-
-  public Person build() { /*...*/ }
-}
-```
-4. Добавьте метод для получения полузаполненного билдера для ребёнка в класс `Person`
-```java
-public class Person {
-  //...
-
-  public PersonBuilder newChildBuilder() { /*...*/ }
-}
-```
-6. Добавьте класс `Main` для демонстрации
-```java
-public class Main {
-  public static void main(String[] args) {
-    Person mom = new PersonBuilder()
-                  .setName("Анна")
-                  .setSurname("Вольф")
-                  .setAge(31)
-                  .setAddress("Сидней")
-                  .build();
-    Person son = mom.newChildBuilder()
-                  .setName("Антошка")
-                  .build();
-    System.out.println("У " + mom + " есть сын, " + son);
-
-    try {
-      // Не хватает обяхательных полей
-      new PersonBuilder().build(); 
-    } catch (IllegalStateException e) {
-      e.printStackTrace(); 
-    }
-
-    try {
-      // Возраст недопустимый
-      new PersonBuilder().setAge(-100).build();
-    } catch (IllegalArgumentException e) {
-      e.printStackTrace();
-    }
-  }
-}
-```
-6. Протестируйте работу программы. Не забывайте про правила форматирования кода (для автоформата можете выделить код в идее и нажать **Ctrl+Alt+L**).
+> 23:01:37: Executing task 'Main.main()'... <br/>
+><br/>
+> Starting Gradle Daemon...<br/>
+> Gradle Daemon started in 2 s 787 ms<br/>
+> Task :compileJava UP-TO-DATE<br/>
+> Task :processResources NO-SOURCE<br/>
+> Task :classes UP-TO-DATE<br/>
+><br/>
+> Task :Main.main()<br/>
+> У Person{name='Анна', surname='Вольф', age=31, address=Сидней} есть сын, Person{name='Антошка', surname='Вольф', address=Сидней}<br/>
+> java.lang.IllegalStateException: Не задано обязательное поле �?мя<br/>
+> 	at creational.PersonBuilder.build(PersonBuilder.java:40)<br/>
+> 	at Main.main(Main.java:20)<br/>
+> java.lang.IllegalArgumentException: Недопустимое значение возраста -100<br/>
+> 	at creational.PersonBuilder.setAge(PersonBuilder.java:25)<br/>
+> 	at Main.main(Main.java:27)<br/>
+> <br/>
+> Deprecated Gradle features were used in this build, making it incompatible with Gradle 7.0.<br/>
+> Use '--warning-mode all' to show the individual deprecation warnings.<br/>
+> See https://docs.gradle.org/6.3/userguide/command_line_interface.html#sec:command_line_warnings<br/>
+> <br/>
+> BUILD SUCCESSFUL in 8s <br/>
+> 2 actionable tasks: 1 executed, 1 up-to-date <br/>
+> 
+> 23:01:48: Task execution finished 'Main.main()'.<br/>
